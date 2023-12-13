@@ -1,7 +1,7 @@
 :root, html, body, #shadow, #tabsiframe {
-	/* put it in a shadow dom and this will all be fine :) */
-	/* everything in em so we can work out where els are positioned */
-	font-size: 9pt;
+    /* put it in a shadow dom and this will all be fine :) */
+    /* everything in em so we can work out where els are positioned */
+    font-size: 9pt;
     
     font-family: "Hack", "SF Mono", monospace;
     color: white; 
@@ -14,13 +14,13 @@
     --tri-tabs-grid-gap: 0.4em;
 
     --tri-tabs-padding-top: 0.5em;
-	--tri-tabs-padding-bottom: 0.5em;
-	
-	--tri-tabs-icon-size: 1em;
+    --tri-tabs-padding-bottom: 0.5em;
+    
+    --tri-tabs-icon-size: 1em;
 
-	/* this is daft, yes? It does work though */
-	--tri-tabs-tab-height: 	calc( max( var(--tri-tabs-line-height), var(--tri-tabs-title-font-size), var(--tri-tabs-icon-size) ) + max( var(--tri-tabs-line-height), var(--tri-tabs-url-font-size), var(--tri-tabs-icon-size) ) );
-    --tri-tabs-tab-padded: 	calc(var(--tri-tabs-tab-height) + var(--tri-tabs-padding-top) + var(--tri-tabs-padding-bottom));
+    /* this is daft, yes? It does work though */
+    --tri-tabs-tab-height:     calc( max( var(--tri-tabs-line-height), var(--tri-tabs-title-font-size), var(--tri-tabs-icon-size) ) + max( var(--tri-tabs-line-height), var(--tri-tabs-url-font-size), var(--tri-tabs-icon-size) ) );
+    --tri-tabs-tab-padded:     calc(var(--tri-tabs-tab-height) + var(--tri-tabs-padding-top) + var(--tri-tabs-padding-bottom));
     --tri-tabs-tab-spacing: calc(var(--tri-tabs-tab-padded) + var(--tri-tabs-grid-gap));
 
     /* vars for max columns and min width from this page: */
@@ -45,30 +45,30 @@ body {
 }
 
 .outermost {
-	top: 3em;
-	position: fixed;
-	width: 100%;
-	height: 100%;
+    top: 3em;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
 .gridalign {
-	width: 80%;
-/* 	height: 100%; */
-	margin: auto;
+    width: 80%;
+/*     height: 100%; */
+    margin: auto;
 }
 
 #tabsiframe {
-	width: 100%;
-	height: 100%;
-	border: none;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 #dimmer {
-	top: 0;
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: rgba(31, 7, 47, 0.5);
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(31, 7, 47, 0.5);
 }
 
 #tabs {
@@ -89,12 +89,13 @@ body {
 }
 
 #ctrls {
-	top: calc(3em - calc( var(--tri-tabs-tab-height) / 2 ) - var(--tri-tabs-grid-gap));
-	display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    /* vertical positioning with controls and tabs is not correct ! */
+    top: calc(3em - calc( var(--tri-tabs-tab-height) / 2 ) - var(--tri-tabs-grid-gap));
+    display: grid;
+    grid-template-columns: grid-template-columns: repeat(auto-fit, minmax(5em, 1fr));
     grid-gap: var(--tri-tabs-grid-gap);
-	position: fixed;
-	text-align: center;
+    position: fixed;
+    text-align: center;
 }
 
 .tab, .ctrl {
@@ -113,23 +114,23 @@ body {
 
 .ctrl {
     height: calc( var(--tri-tabs-tab-height) / 2 );
-	
-	/* top, right, bottom, left */
+    
+    /* top, right, bottom, left */
     padding: var(--tri-tabs-padding-top) 1.5em var(--tri-tabs-padding-bottom) 1.5em;
 }
 
 
 /* potentially message the iframe with currently selected hint to get styling over there */
 .TridactylHintActive {
-	background: rgb(32, 36, 44);
+    background: rgb(32, 36, 44);
 }
 
 .TridactylHintActive>.text>.title, .TridactylHintActive {
-	color: white;
+    color: white;
 }
 
 .TridactylHintActive>.text>.url {
-	color: yellow;
+    color: yellow;
 }
 
 .icons {
@@ -153,11 +154,11 @@ p {
 }
 
 .title {
-	font-size: var(--tri-tabs-title-font-size);
+    font-size: var(--tri-tabs-title-font-size);
 }
 
 .url {
-	font-size: var(--tri-tabs-url-font-size);
+    font-size: var(--tri-tabs-url-font-size);
     color: slateblue;
 }
 
