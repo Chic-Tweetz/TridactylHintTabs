@@ -1,4 +1,4 @@
-/* send tab info to iframe with localhost source */
+/* send tab info to iframe with https://chic-tweetz.github.io/TridactylHintTabs as the source */
 /* create matching hints to switch to selected tab */
 
 if (tri.tabsiframe !== undefined) {
