@@ -10,9 +10,13 @@ if (tri.tabsiframe !== undefined) {
 
     /* send custom css to iframe - replaces customstyle contents entirely in iframe html */
     ti.customStyle = "";
+    
+    ti.msg = function(msg) {
+    	tri.tabsiframe.iframe.contentWindow.postMessage(msg, "https://chic-tweetz.github.io");	
+    };
 
     ti.sendStyle = function(style) {
-        ti.iframe.contentWindow.postMessage(["style",style], "*");
+    	ti.msg(["style", style]);
     };
 
     /* index of first tab to list */
@@ -51,6 +55,7 @@ if (tri.tabsiframe !== undefined) {
         ti.styleloaded = true;
         ti.maxcells(ti.tabslist.length);
         if (ti.iframeloaded === true) {
+        	ti.observer.observe(ti.observerTarget, { attributes: true, subtree: true });
             ti.sendtabs();
         }
 
@@ -62,6 +67,7 @@ if (tri.tabsiframe !== undefined) {
         ti.iframeloaded = true;
         ti.sendStyle(ti.customStyle);
         if (ti.styleloaded === true) {
+        	ti.observer.observe(ti.observerTarget, { attributes: true, subtree: true });
             ti.sendtabs();
         }
     };
@@ -138,7 +144,7 @@ if (tri.tabsiframe !== undefined) {
         /* I wonder if there's a quick way to get this through the tri object somewhere? */
         ti.observerTarget = gridAlign;
         ti.observer = new MutationObserver(highlightActiveTab);
-        ti.observer.observe(ti.observerTarget, { attributes: true, subtree: true });
+        
     };
 
     /* onload events will show tabs/hint from this */
@@ -150,12 +156,12 @@ if (tri.tabsiframe !== undefined) {
 
         /* added an index attribute to speed this up */
         if (activeTab) {
-            tri.tabsiframe.iframe.contentWindow.postMessage(["highlight", activeTab.index], "*");
+            ti.msg(["highlight", activeTab.index]);
             return;
         }
 
         /* sending a -1 removes the highlight */
-        tri.tabsiframe.iframe.contentWindow.postMessage(["highlight",-1], "*");
+        tri.tabsiframe.msg(["highlight",-1]);
     }
 
 
@@ -197,7 +203,7 @@ if (tri.tabsiframe !== undefined) {
 
     /* message iframe the tab array and number to display */
     ti.sendtabs = function() {
-        ti.iframe.contentWindow.postMessage(["newtabs", ti.tabslist, ti.hintcount], "*");
+    	ti.msg(["newtabs", ti.tabslist, ti.hintcount]);
     };
 
     /* update list of tabs to be current, repopulate appropriate divs/iframe content */
@@ -238,7 +244,7 @@ if (tri.tabsiframe !== undefined) {
             ti.firsttab = newstart;
             ti.hintcount = Math.min(ti.tabslist.length - newstart, ti.hintgrid.childElementCount);
             ti.updatehints();
-            ti.iframe.contentWindow.postMessage(["range", newstart, ti.hintcount], "*");
+            ti.msg(["range", newstart, ti.hintcount]);
         }
 
         ti.hint();
@@ -251,7 +257,7 @@ if (tri.tabsiframe !== undefined) {
             ti.firsttab = newstart;
             ti.hintcount = Math.min(ti.tabslist.length - newstart, ti.maxVisibleCells);
             ti.updatehints();
-            ti.iframe.contentWindow.postMessage(["range", newstart, ti.hintcount], "*");
+            ti.msg(["range", newstart, ti.hintcount]);
         }
 
         ti.hint();
