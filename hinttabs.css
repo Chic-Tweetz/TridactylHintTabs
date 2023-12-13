@@ -92,6 +92,7 @@ body {
     /* vertical positioning with controls and tabs is not correct ! */
     top: calc(3em - calc( var(--tri-tabs-tab-height) / 2 ) - var(--tri-tabs-grid-gap));
     display: grid;
+    width: 80%;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: var(--tri-tabs-grid-gap);
     position: fixed;
